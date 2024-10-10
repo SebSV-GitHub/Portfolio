@@ -18,9 +18,11 @@ jobs:
     steps:
       - name: Download artifact
         uses: actions/download-artifact@v4
+      - name: Compress artifact
+        run: zip -r build.zip build/
       - name: Release
         uses: ncipollo/release-action@v1
         with:
           tag: ${{ inputs.tag }}
-          artifacts: "build"
+          artifacts: "build.zip"
           generateReleaseNotes: true
