@@ -1,0 +1,62 @@
+{
+	"name": "portfolio",
+	"version": "1.0.0",
+	"private": true,
+	"description": "Personal Portfolio/Resume",
+	"scripts": {
+		"develop": "gatsby develop",
+		"start": "gatsby develop",
+		"build": "gatsby build",
+		"serve": "gatsby serve",
+		"clean": "gatsby clean",
+		"format": "prettier --write --ignore-unknown .",
+		"lint": "xo --fix",
+		"prepare": "husky"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/SebSV-GitHub/Portfolio.git"
+	},
+	"keywords": [
+		"React.js",
+		"Gatsby",
+		"Material UI",
+		"Contentful CMS",
+		"GitHub Actons",
+		"AWS"
+	],
+	"author": "Sebastián Suárez Valencia <contact@sebsv.com> (https://www.sebsv.com)",
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/SebSV-GitHub/Portfolio/issues"
+	},
+	"homepage": "https://github.com/SebSV-GitHub/Portfolio#readme",
+	"dependencies": {
+		"@emotion/react": "^11.13.3",
+		"@emotion/styled": "^11.13.0",
+		"@fontsource/roboto": "^5.1.0",
+		"@mui/icons-material": "^6.1.2",
+		"@mui/material": "^6.1.2",
+		"gatsby": "^5.13.7",
+		"gatsby-plugin-emotion": "^8.13.1",
+		"gatsby-plugin-google-gtag": "^5.13.1",
+		"gatsby-plugin-image": "^3.13.1",
+		"gatsby-plugin-manifest": "^5.13.1",
+		"gatsby-plugin-sharp": "^5.13.1",
+		"gatsby-plugin-sitemap": "^6.13.1",
+		"gatsby-source-contentful": "^8.13.2",
+		"gatsby-source-filesystem": "^5.13.1",
+		"gatsby-transformer-remark": "^6.13.1",
+		"gatsby-transformer-sharp": "^5.13.1",
+		"react": "^18.2.0",
+		"react-dom": "^18.2.0"
+	},
+	"devDependencies": {
+		"eslint-config-xo-react": "^0.27.0",
+		"eslint-plugin-react": "^7.37.1",
+		"eslint-plugin-react-hooks": "^4.6.2",
+		"husky": "^9.1.6",
+		"lint-staged": "^15.2.10",
+		"xo": "^0.59.3"
+	}
+}

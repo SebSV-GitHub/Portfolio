@@ -1,0 +1,27 @@
+name: Build
+
+on:
+  workflow_call:
+    outputs:
+      artifact:
+        description: Artifact URL
+        value: ${{ jobs.build.outputs.artifact }}
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    outputs:
+      artifact: ${{ steps.upload-artifact.outputs.artifact-url }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Build
+        run: |
+          npm i
+          npm run build
+      - name: Archive production artifacts
+        id: upload-artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: build
+          path: public
