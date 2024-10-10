@@ -14,9 +14,13 @@ jobs:
   tag:
     needs: [build]
     uses: ./.github/workflows/tag.yml
-  releasing:
+  release:
     needs: [build, tag]
     uses: ./.github/workflows/release.yml
     with:
       tag: ${{ needs.tag.outputs.tag }}
       artifact: ${{ needs.build.outputs.artifact }}
+  deploy:
+    needs: [release]
+    uses: ./.github/workflows/deploy.yml
+    secrets: inherit
