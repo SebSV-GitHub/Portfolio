@@ -6,6 +6,9 @@ on:
       artifact:
         description: Artifact URL
         value: ${{ jobs.build.outputs.artifact }}
+    secrets:
+      CONTENTFUL_ACCESS_TOKEN:
+        required: true
 
 jobs:
   build:
