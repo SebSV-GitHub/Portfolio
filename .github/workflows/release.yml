@@ -22,5 +22,5 @@ jobs:
         uses: ncipollo/release-action@v1
         with:
           tag: ${{ inputs.tag }}
-          artifacts: "build.zip"
+          artifacts: "build"
           generateReleaseNotes: true
