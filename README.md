@@ -34,7 +34,7 @@ This repository contains the source code for my personal portfolio website, buil
 1. **📂 Clone the repository**:
 
    ```bash
-   git clone git@github.com:SebSV-GitHub/Portfolio.git
+   git clone https://github.com/your-username/portfolio.git
    cd portfolio
    ```
 
@@ -52,45 +52,80 @@ This repository contains the source code for my personal portfolio website, buil
    GOOGLE_ANALYTICS_TRACKING_ID=UA-XXXXXXXXX-X
    ```
 
+## 🔑 Setting Up Secrets and Environment Variables in GitHub
+
+To use GitHub Actions workflows effectively, set up the following secrets and environment variables in your GitHub repository. These will allow the workflows to access necessary credentials and configuration values for building, deploying, and managing the project.
+
+1. **🔧 Go to your GitHub repository** > **Settings** > **Secrets and variables** > **Actions**.
+2. Click **New repository secret** or **New repository variable** and add the following:
+
+### 🔒 Secrets
+
+| Secret Name               | Description                                   |
+| ------------------------- | --------------------------------------------- |
+| `CONTENTFUL_ACCESS_TOKEN` | Access token for Contentful to fetch CMS data |
+
+### 🌐 Environment Variables
+
+| Variable Name                  | Description                                     |
+| ------------------------------ | ----------------------------------------------- |
+| `AWS_BUCKET_NAME`              | Your AWS S3 bucket name                         |
+| `AWS_DISTRIBUTION_ID`          | AWS CloudFront distribution ID                  |
+| `AWS_IAM_ROLE`                 | IAM role with permissions for S3 and CloudFront |
+| `AWS_REGION`                   | AWS region where the S3 bucket is hosted        |
+| `CONTENTFUL_SPACE_ID`          | Contentful space ID to access CMS content       |
+| `GOOGLE_ANALYTICS_TRACKING_ID` | Tracking ID for Google Analytics                |
+
+After adding these secrets and variables, they will be available to your GitHub Actions workflows as environment variables, allowing for secure access to third-party services during the build and deployment processes.
+
 ## 🚢 GitHub Actions Workflow
 
 This project uses GitHub Actions for an automated release and deployment pipeline, following these steps:
 
-1. **Semantic Versioning**: Every push to the main branch triggers semantic versioning to increment version numbers automatically.
-2. **Create Release**: A new release is generated with version tags and release notes.
-3. **Build and Upload Artifact**: The release build is generated, optimized, and uploaded as an artifact in the GitHub release.
-4. **Manual Deployment**: Once the release is created, you can manually trigger deployment to AWS S3 and CloudFront.
+1. **🔖 Semantic Versioning**: Every push to the main branch triggers semantic versioning to increment version numbers automatically.
+2. **📦 Create Release**: A new release is generated with version tags and release notes.
+3. **⚙️ Build and Upload Artifact**: The release build is generated, optimized, and uploaded as an artifact in the GitHub release.
+4. **🚀 Manual Deployment**: Once the release is created, you can manually trigger deployment to AWS S3 and CloudFront.
 
-To deploy manually, download the latest artifact from the release and upload it to your AWS S3 bucket. Then, use AWS CloudFront to invalidate the cache and serve updated content globally.
+### 🔐 Protecting the Main Branch
 
-In order allow the workflow to be shared you need to follow this [Article](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/enabling-features-for-your-repository/managing-github-actions-settings-for-a-repository#allowing-select-actions-and-reusable-workflows-to-run)
+To enforce best practices and protect the `main` branch from direct modifications, configure branch protection rules:
 
-The workflows created here follow this [patter](https://docs.github.com/en/actions/sharing-automations/reusing-workflows#creating-a-reusable-workflow)
+1. **Go to your GitHub repository** > **Settings** > **Branches** > **Branch protection rules**.
+2. Click **Add rule** and set the following rules for the `main` branch:
 
-> Don't forget to add this environment variables: CONTENTFUL_SPACE_ID and GOOGLE_ANALYTICS_TRACKING_ID, and the secret: CONTENTFUL_ACCESS_TOKEN
+   - **✅ Require pull request reviews before merging**: Enforce a review process for all changes.
+   - **⚠️ Require status checks to pass before merging**: Ensure that all tests and workflows in GitHub Actions complete successfully before merging.
+   - **🔏 Require signed commits** (optional): For added security, require that all commits are signed.
+   - **🔄 Require linear history**: Enforce a linear history by preventing merge commits.
+   - **🔐 Include administrators** (optional): If you want these rules to apply to administrators as well.
 
-### Manually Deploying to S3 and CloudFront
+3. Click **Create** to save the branch protection rules.
+
+These protections help maintain the integrity of the `main` branch by enforcing a review and testing process before any code is merged.
+
+### ⚙️ Manually Deploying to S3 and CloudFront
 
 If you need to manually deploy after a release:
 
-1. **Download the Artifact**:
+1. **⬇️ Download the Artifact**:
 
    - Go to the release in GitHub and download the artifact from the release assets.
 
-2. **Upload to AWS S3**:
+2. **☁️ Upload to AWS S3**:
 
    - Use the AWS CLI or AWS S3 console to upload the artifact files to the specified S3 bucket.
 
    ```bash
-   aws s3 sync ./public s3://your-bucket-name
+   aws s3 sync ./public s3://$AWS_BUCKET_NAME
    ```
 
-3. **Invalidate CloudFront Cache**:
+3. **🚀 Invalidate CloudFront Cache**:
 
    - Use the AWS CLI to invalidate the CloudFront distribution cache, ensuring that updated content is delivered.
 
    ```bash
-   aws cloudfront create-invalidation --distribution-id YOUR_DISTRIBUTION_ID --paths "/*"
+   aws cloudfront create-invalidation --distribution-id $AWS_DISTRIBUTION_ID --paths "/*"
    ```
 
 ## 📋 Contentful Setup
@@ -117,6 +152,29 @@ If you need to manually deploy after a release:
    npm install gatsby-plugin-google-analytics
    ```
 4. **🛠️ Add Google Analytics to `gatsby-config.mjs`** with the tracking ID as shown in the ESM setup.
+
+## 📝 Commit Naming Standards
+
+This project follows **[Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/#summary)** to maintain clear and consistent commit messages. Use the following format for commit messages:
+
+```
+<type>[optional scope]: <description>
+```
+
+### Examples of Commit Types
+
+- **feat**: Adding a new feature (e.g., `feat: add new project page`)
+- **fix**: Fixing a bug (e.g., `fix: resolve API request issue`)
+- **docs**: Documentation changes (e.g., `docs: update README with setup instructions`)
+- **style**: Code style changes (non-functional, like formatting) (e.g., `style: format code with Prettier`)
+- **refactor**: Refactoring code
+
+(no functional changes) (e.g., `refactor: optimize component structure`)
+
+- **test**: Adding or updating tests (e.g., `test: add tests for login function`)
+- **chore**: Routine tasks or maintenance (e.g., `chore: update dependencies`)
+
+Using Conventional Commits helps in generating changelogs, automating release processes, and understanding the history of changes.
 
 ## ✅ Code Quality and Linting
 
@@ -154,12 +212,6 @@ To customize this repository for your own portfolio, update the following:
 └── ...
 ```
 
-## ☁️ AWS
-
-Create a S3 bucket
-Use this [guide](https://github.com/aws-actions/configure-aws-credentials?tab=readme-ov-file#OIDC) to get the credentials
-This are the necessary permissions:
-
 ## 🤝 Contributing
 
 If you’d like to contribute to this portfolio, feel free to fork the repo and submit a pull request. Improvements and feature suggestions are welcome!
@@ -170,4 +222,4 @@ This project is licensed under the MIT License - see the [LICENSE](./LICENSE) fi
 
 ## 📬 Contact
 
-For any questions or feedback, please reach out through my [LinkedIn](https://www.linkedin.com/in/sebastian-suarez-valencia/) or visit my [website](https://www.sebsv.com).
+For any questions or feedback, please reach out through my [LinkedIn](https://www.linkedin.com/) or visit my [website](https://your-portfolio-link.com).
