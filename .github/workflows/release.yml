@@ -6,6 +6,7 @@ on:
       tag:
         required: true
         type: string
+
       artifact:
         required: true
         type: string

@@ -156,8 +156,9 @@ To customize this repository for your own portfolio, update the following:
 
 ## ☁️ AWS
 
-Create a S3 buckete
+Create a S3 bucket
 Use this [guide](https://github.com/aws-actions/configure-aws-credentials?tab=readme-ov-file#OIDC) to get the credentials
+This are the necessary permissions:
 
 ## 🤝 Contributing
 
