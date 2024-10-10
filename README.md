@@ -67,6 +67,8 @@ In order allow the workflow to be shared you need to follow this [Article](https
 
 The workflows created here follow this [patter](https://docs.github.com/en/actions/sharing-automations/reusing-workflows#creating-a-reusable-workflow)
 
+> Don't forget to add this environment variables: CONTENTFUL_SPACE_ID and GOOGLE_ANALYTICS_TRACKING_ID, and the secret: CONTENTFUL_ACCESS_TOKEN
+
 ### Manually Deploying to S3 and CloudFront
 
 If you need to manually deploy after a release:
@@ -163,12 +165,3 @@ This project is licensed under the MIT License - see the [LICENSE](./LICENSE) fi
 ## 📬 Contact
 
 For any questions or feedback, please reach out through my [LinkedIn](https://www.linkedin.com/in/sebastian-suarez-valencia/) or visit my [website](https://www.sebsv.com).
-
-> Repository Secrests:
->
-> - AWS_ACESS_KEY
-> - AWS_SECRET_ACCESS_KEY
-
-> Repository Variables:
->
-> - AWS_REGION
