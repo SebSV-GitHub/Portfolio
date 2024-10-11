@@ -1,0 +1,27 @@
+name: Merge
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: write
+  id-token: write
+
+jobs:
+  build:
+    uses: ./.github/workflows/build.yml
+    secrets: inherit
+  tag:
+    needs: [build]
+    uses: ./.github/workflows/tag.yml
+  release:
+    needs: [build, tag]
+    uses: ./.github/workflows/release.yml
+    with:
+      tag: ${{ needs.tag.outputs.tag }}
+      artifact: ${{ needs.build.outputs.artifact }}
+  deploy:
+    needs: [release]
+    uses: ./.github/workflows/deploy.yml
+    secrets: inherit

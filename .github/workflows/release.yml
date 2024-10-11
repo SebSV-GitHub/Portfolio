@@ -1,0 +1,29 @@
+name: Release
+
+on:
+  workflow_call:
+    inputs:
+      tag:
+        required: true
+        type: string
+
+      artifact:
+        required: true
+        type: string
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Download artifact
+        uses: actions/download-artifact@v4
+      - name: Compress artifact
+        run: zip -r build.zip build/
+      - name: Release
+        uses: ncipollo/release-action@v1
+        with:
+          tag: ${{ inputs.tag }}
+          artifacts: "build.zip"
+          generateReleaseNotes: true

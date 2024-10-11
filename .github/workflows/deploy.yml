@@ -1,0 +1,25 @@
+name: Deploy
+
+on:
+  workflow_call:
+
+permissions:
+  id-token: write
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: build
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ vars.AWS_IAM_ROLE }}
+          aws-region: ${{ vars.AWS_REGION }}
+      - name: Upload to S3
+        run: aws s3 sync $GITHUB_WORKSPACE s3://${{ vars.AWS_BUCKET_NAME }}
+      - name: Invalidate CloudFront distribution
+        run: aws cloudfront create-invalidation --distribution-id ${{ vars.AWS_DISTRIBUTION_ID }} --paths "/*"
