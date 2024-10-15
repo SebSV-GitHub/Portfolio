@@ -17,4 +17,4 @@ jobs:
         with:
           fetch-tags: true
       - name: Create tag
-        run: git tag
+        run: git describe
