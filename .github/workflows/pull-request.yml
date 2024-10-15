@@ -12,5 +12,5 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - name: Testing
-        run: echo "Hello world!"
+      - name: Create tag
+        uses: ./.github/workflows/tag.yml
