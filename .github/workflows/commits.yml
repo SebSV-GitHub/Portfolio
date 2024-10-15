@@ -19,3 +19,5 @@ jobs:
           ref: ${{ github.ref }}
       - name: Verify commit messages
         run: bash scripts/validate-commit-message.sh
+      - name: Tag
+        uses: ./.github/workflows/tag.yml
