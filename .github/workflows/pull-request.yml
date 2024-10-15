@@ -15,4 +15,4 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
       - name: Create tag
-        uses: ./.github/workflows/tag.yml
+        run: echo "Hello world!"
