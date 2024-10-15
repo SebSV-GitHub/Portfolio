@@ -22,4 +22,4 @@ jobs:
       - name: List files
         run: ls -la ./.github/workflows
       - name: Repo name
-        uses: ./github/actons/tag/action.yml
+        uses: ./github/actons/tag
