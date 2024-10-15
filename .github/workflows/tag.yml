@@ -10,7 +10,5 @@ jobs:
   tag:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-      - name: Generate tag
-        run: git describe --tags --abbrev=0
+      - name: Test
+        run: echo "Hello world!"

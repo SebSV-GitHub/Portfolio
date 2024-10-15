@@ -1,12 +1,7 @@
 name: Check commit messages
 
 on:
-  pull_request:
-    types:
-      - opened
-      - edited
-      - reopened
-      - synchronize
+  workflow_call:
 
 jobs:
   check-commit-message:
@@ -19,5 +14,3 @@ jobs:
           ref: ${{ github.ref }}
       - name: Verify commit messages
         run: bash scripts/validate-commit-message.sh
-      - name: Create tag
-        uses: ./.github/workflows/tag.yml
