@@ -22,4 +22,4 @@ jobs:
       - name: List files
         run: ls -la ./.github/workflows
       - name: Repo name
-        run: echo ${{ github.repository }}
+        uses: ./github/actons/tag/action.yml
