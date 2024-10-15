@@ -20,4 +20,4 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
       - name: List files
-        run: ls -la
+        run: ls -la ./.github/workflows
