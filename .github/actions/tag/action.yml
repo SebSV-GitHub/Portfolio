@@ -5,5 +5,10 @@ description: Generates a tag based on the branch and SemVer
 runs:
   using: "composite"
   steps:
-    - run: echo "Hello world!"
+    - uses: actions/checkout@v4
+      with:
+        fetch-tags: true
+        ref: main
+    - name: Get latest tag
+      run: git describe --tags --abbrev=0
       shell: bash

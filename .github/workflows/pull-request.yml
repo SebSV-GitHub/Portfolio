@@ -15,11 +15,7 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - name: Hello world
-        run: echo "Hello world"
       - name: Checkout
         uses: actions/checkout@v4
-      - name: List files
-        run: ls -la ./.github/workflows
-      - name: Repo name
+      - name: Create tag
         uses: ./.github/actions/tag
