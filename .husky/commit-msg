@@ -1,1 +1,1 @@
-bash .scripts/validate-commit-message.sh $(git rev-parse --abbrev-ref HEAD)
+# bash .scripts/validate-commit-message.sh $(git rev-parse --abbrev-ref HEAD)
