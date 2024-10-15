@@ -8,14 +8,9 @@ on:
       - reopened
       - synchronize
 
-permissions:
-  contents: write
-
 jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
       - name: Create tag
         uses: ./.github/actions/tag
