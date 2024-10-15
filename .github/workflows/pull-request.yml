@@ -18,4 +18,4 @@ jobs:
           fetch-depth: 0
           fetch-tags: true
       - name: Create tag
-        run: git describe --tags --abbrev=0
+        uses: ./.github/workflows/tag.yml
