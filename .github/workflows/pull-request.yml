@@ -12,5 +12,6 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - name: Create tag
-        uses: ./.github/actions/tag
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: .github
