@@ -12,5 +12,7 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout
+        uses: actions/checkout@v4
       - name: Create tag
         uses: ./.github/workflows/tag.yml

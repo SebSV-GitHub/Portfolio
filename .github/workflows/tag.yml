@@ -1,14 +1,11 @@
-name: Tag
+name: Tagging
 
 on:
   workflow_call:
 
-permissions:
-  contents: write
-
 jobs:
-  tag:
+  tagging:
     runs-on: ubuntu-latest
     steps:
-      - name: Test
+      - name: Echo
         run: echo "Hello world!"
