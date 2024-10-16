@@ -12,5 +12,5 @@ runs:
     - name: Get latest tag
       run: |
         git describe --tags --abbrev=0
-        git checkout ${{ github.ref }}
+        git checkout ${{ github.head_ref }}
       shell: bash
