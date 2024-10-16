@@ -7,10 +7,9 @@ runs:
   steps:
     - uses: actions/checkout@v4
       with:
+        fetch-depth: 0
         fetch-tags: true
         ref: main
     - name: Get latest tag
-      run: |
-        git describe --tags --abbrev=0
-        git checkout ${{ github.head_ref }}
+      run: git describe --tags --abbrev=0
       shell: bash
