@@ -1,12 +1,7 @@
 name: Check commit messages
 
 on:
-  pull_request:
-    types:
-      - opened
-      - edited
-      - reopened
-      - synchronize
+  workflow_call:
 
 jobs:
   check-commit-message:
